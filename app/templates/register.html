@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Kay�t Ol</title>
+</head>
+<body>
+    <h2>Kay�t Ol</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.username.label }}<br>
+        {{ form.username(size=32) }}<br><br>
+
+        {{ form.password.label }}<br>
+        {{ form.password(size=32) }}<br><br>
+
+        {{ form.submit() }}
+    </form>
+
+    <p>Zaten hesab�n var m�? <a href="{{ url_for('main.login') }}">Giri� Yap</a></p>
+</body>
+</html>
