@@ -11,3 +11,8 @@ class LoginForm(FlaskForm):
     username = StringField('Kullanici Adi', validators=[DataRequired()])
     password = PasswordField('Sifre', validators=[DataRequired()])
     submit = SubmitField('Giris Yap')
+
+class ResetPasswordForm(FlaskForm):
+    username = StringField('Kullanici Adi', validators=[DataRequired()])
+    new_password = PasswordField('Yeni sifre', validators=[DataRequired()])
+    submit = SubmitField('Sifreyi Sifirla')

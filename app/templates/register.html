@@ -2,10 +2,22 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Kay�t Ol</title>
+    <title>Kayıt Ol</title>
 </head>
 <body>
-    <h2>Kay�t Ol</h2>
+    <h2>Kayıt Ol</h2>
+
+    <!-- FLASH MESAJLAR -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div style="color: {% if category == 'success' %}green{% else %}red{% endif %};">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
     <form method="POST">
         {{ form.hidden_tag() }}
         {{ form.username.label }}<br>
@@ -17,6 +29,6 @@
         {{ form.submit() }}
     </form>
 
-    <p>Zaten hesab�n var m�? <a href="{{ url_for('main.login') }}">Giri� Yap</a></p>
+    <p>Zaten hesabın var mı? <a href="{{ url_for('main.login') }}">Giriş Yap</a></p>
 </body>
 </html>
