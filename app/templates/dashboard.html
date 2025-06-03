@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 70%;
+        }
+
+        th, td {
+            padding: 8px;
+            border: 1px solid #aaa;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+    </style>
+
+</head>
+<body>
+    <h2>Hoş geldin {{ current_user.username }}!</h2>
+
+    <ul>
+        <li><a href="{{ url_for('main.add_word') }}">📚 Yeni Kelime Ekle</a></li>
+        <li><a href="{{ url_for('main.quiz') }}">🧠 Quiz'e Başla</a></li>
+        <li><a href="{{ url_for('main.progress') }}">📊 İlerleme Durumum</a></li>
+        <li><a href="{{ url_for('main.history') }}">📘 Kelime Geçmişim</a></li>
+        <li><a href="{{ url_for('main.reset_password') }}">🔐 Şifremi Sıfırla</a></li>
+        <li><a href="{{ url_for('main.logout') }}">🚪 Çıkış Yap</a></li>
+    </ul>
+
+    <h3>📘 Öğrenme Sürecin</h3>
+    <table border="1">
+        <tr>
+            <th>Kelime</th>
+            <th>Doğru</th>
+            <th>Yanlış</th>
+            <th>Son Cevap</th>
+            <th>Öğrenildi mi?</th>
+        </tr>
+        {% for item in stats %}
+        <tr>
+            <td>{{ item.word.eng_word }}</td>
+            <td>{{ item.correct_count }}</td>
+            <td>{{ item.wrong_count }}</td>
+            <td>{{ item.last_answered.strftime('%d.%m.%Y %H:%M') if item.last_answered else '-' }}</td>
+            <td>
+                {% if item.correct_count >= 6 %}
+                ✅ Evet
+                {% else %}
+                ⏳ Hayır
+                {% endif %}
+            </td>
+            <td>{{ item.level }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

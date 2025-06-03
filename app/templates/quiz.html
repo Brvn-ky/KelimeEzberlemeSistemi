@@ -1,13 +1,13 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Kayıt Ol</title>
+    <title>Quiz</title>
 </head>
 <body>
-    <h2>Kayıt Ol</h2>
+    <h2>Bu kelimenin Türkçesi nedir?</h2>
+    <h3>{{ word.eng_word }}</h3>
 
-    <!-- FLASH MESAJLAR -->
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
     {% for category, message in messages %}
@@ -20,15 +20,11 @@
 
     <form method="POST">
         {{ form.hidden_tag() }}
-        {{ form.username.label }}<br>
-        {{ form.username(size=32) }}<br><br>
-
-        {{ form.password.label }}<br>
-        {{ form.password(size=32) }}<br><br>
-
+        {{ form.answer.label }}<br>
+        {{ form.answer(size=40) }}<br><br>
         {{ form.submit() }}
     </form>
 
-    <p>Zaten hesabın var mı? <a href="{{ url_for('main.login') }}">Giriş Yap</a></p>
+    <p><a href="{{ url_for('main.dashboard') }}">Dashboard'a dön</a></p>
 </body>
 </html>
