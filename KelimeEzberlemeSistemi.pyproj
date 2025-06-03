@@ -1141,7 +1141,10 @@
     <Content Include="app\static\uploads\word.jpg" />
     <Content Include="app\templates\add_word.html" />
     <Content Include="app\templates\dashboard.html" />
+    <Content Include="app\templates\history.html" />
     <Content Include="app\templates\login.html" />
+    <Content Include="app\templates\progress.html" />
+    <Content Include="app\templates\quiz.html" />
     <Content Include="app\templates\register.html" />
     <Content Include="app\templates\reset_password.html" />
     <Content Include="app\__pycache__\extensions.cpython-312.pyc" />

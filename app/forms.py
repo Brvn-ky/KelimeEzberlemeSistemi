@@ -26,3 +26,7 @@ class WordForm(FlaskForm):
     sentence = StringField('Ornek Cumle', validators=[DataRequired()])
     image = FileField('Resim Yukle', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
     submit = SubmitField('Kelimeyi Ekle')
+
+class QuizForm(FlaskForm):
+    answer = StringField('Turkce Karsiligi', validators=[DataRequired()])
+    submit = SubmitField('Cevapla')

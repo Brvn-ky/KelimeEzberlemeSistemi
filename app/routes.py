@@ -1,6 +1,7 @@
 
 from app.models import User
 from app import db, bcrypt
+# -*- coding: <meta charset="UTF-8"> -*-
 from app.extensions import db
 import os
 from flask import current_app
@@ -11,12 +12,13 @@ from app.forms import RegisterForm, LoginForm, ResetPasswordForm, WordForm
 from app.models import User, Word, WordSample
 from app.extensions import db, bcrypt
 from flask_login import login_user, logout_user, login_required, current_user
-from flask import Blueprint, render_template, redirect, url_for, flash
-from app.forms import RegisterForm, LoginForm
-from app.models import User
-from app import db, bcrypt
-from flask_login import login_user, logout_user, login_required
-from app.extensions import db
+from app.models import QuizHistory
+from datetime import datetime
+import random
+from app.forms import QuizForm
+from app.models import QuizHistory
+from flask_login import current_user
+
 main = Blueprint('main', __name__)
 
 @main.route('/register', methods=['GET', 'POST'])
@@ -61,7 +63,8 @@ def login():
 @main.route('/dashboard')
 @login_required
 def dashboard():
-    return render_template('dashboard.html')
+    stats = QuizHistory.query.filter_by(user_id=current_user.id).all()
+    return render_template('dashboard.html', stats=stats)
 
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -121,3 +124,113 @@ def add_word():
         return redirect(url_for('main.add_word'))
 
     return render_template('add_word.html', form=form)
+
+
+@main.route('/progress')
+@login_required
+def progress():
+    stats = QuizHistory.query.filter_by(user_id=current_user.id).all()
+    return render_template('progress.html', stats=stats)
+
+from datetime import datetime, timedelta
+
+def is_due(history):
+    if not history.last_answered:
+        return True
+
+    now = datetime.utcnow()
+    delay_map = {
+        0: timedelta(seconds=0),
+        1: timedelta(days=1),
+        2: timedelta(days=3),
+        3: timedelta(weeks=1),
+        4: timedelta(days=30),
+        5: timedelta(days=90),
+        6: timedelta(days=9999),  # öðrenilmiþ
+    }
+
+    next_due = history.last_answered + delay_map.get(history.level, timedelta(days=9999))
+    return now >= next_due
+
+@main.route('/quiz', methods=['GET', 'POST'])
+@login_required
+def quiz():
+    form = QuizForm()
+    all_words = Word.query.all()
+
+    # uygun kelimeleri filtrele
+    quiz_list = []
+    for word in all_words:
+        history = QuizHistory.query.filter_by(user_id=current_user.id, word_id=word.id).first()
+        if not history or is_due(history):
+            quiz_list.append(word)
+
+    if not quiz_list:
+        flash("?? Bugün çalýþman gereken kelime yok. Tebrikler!", "info")
+        return redirect(url_for('main.dashboard'))
+
+    word = random.choice(quiz_list)
+
+    if form.validate_on_submit():
+        user_answer = form.answer.data.strip().lower()
+        correct_answer = word.tur_word.lower()
+        is_correct = (user_answer == correct_answer)
+
+        history = QuizHistory.query.filter_by(user_id=current_user.id, word_id=word.id).first()
+        if not history:
+            history = QuizHistory(user_id=current_user.id, word_id=word.id, correct_count=0, wrong_count=0, level=0)
+
+        if is_correct:
+            history.correct_count += 1
+            history.level = min(history.level + 1, 6)
+            flash(f"? Doðru! Seviye: {history.level}", "success")
+        else:
+            history.correct_count = 0
+            history.wrong_count += 1
+            history.level = 0
+            flash("? Yanlýþ! Seviye sýfýrlandý.", "danger")
+
+        history.last_answered = datetime.utcnow()
+        db.session.add(history)
+        db.session.commit()
+        return redirect(url_for('main.quiz'))
+
+    return render_template('quiz.html', form=form, word=word)
+
+@main.route('/history')
+@login_required
+def history():
+    records = QuizHistory.query.filter_by(user_id=current_user.id).all()
+
+    delay_map = {
+        0: timedelta(seconds=0),
+        1: timedelta(days=1),
+        2: timedelta(days=3),
+        3: timedelta(weeks=1),
+        4: timedelta(days=30),
+        5: timedelta(days=90),
+        6: timedelta(days=9999),
+    }
+
+    word_logs = []
+
+    now = datetime.utcnow()
+
+    for r in records:
+        kelime = r.word.eng_word
+        level = r.level
+        last = r.last_answered or datetime(1970,1,1)
+        expected = last + delay_map.get(level, timedelta(days=9999))
+        gecmis = now >= expected
+        progress = f"%{(level/6)*100:.0f}"
+
+        word_logs.append({
+            "kelime": kelime,
+            "level": level,
+            "last": last.strftime("%d.%m.%Y %H:%M"),
+            "bekleme": delay_map.get(level).days if level < 6 else "-",
+            "durum": "?? Gösterilmeli" if gecmis else "? Henüz deðil",
+            "ilerleme": progress
+        })
+
+    return render_template("history.html", logs=word_logs)
