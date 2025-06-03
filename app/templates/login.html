@@ -2,6 +2,7 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
+<<<<<<< HEAD
     <title>Giriş Yap</title>
 </head>
 <body>
@@ -18,6 +19,12 @@
     {% endif %}
     {% endwith %}
 
+=======
+    <title>Giri� Yap</title>
+</head>
+<body>
+    <h2>Giri� Yap</h2>
+>>>>>>> a7e5534 (Proje dosyası ekle.)
     <form method="POST">
         {{ form.hidden_tag() }}
         {{ form.username.label }}<br>
@@ -29,6 +36,10 @@
         {{ form.submit() }}
     </form>
 
+<<<<<<< HEAD
     <p>Hesabın yok mu? <a href="{{ url_for('main.register') }}">Kayıt Ol</a></p>
+=======
+    <p>Hesab�n yok mu? <a href="{{ url_for('main.register') }}">Kay�t Ol</a></p>
+>>>>>>> a7e5534 (Proje dosyası ekle.)
 </body>
 </html>

@@ -1,6 +1,6 @@
+
 from app.models import User
 from app import db, bcrypt
-# -*- coding: <meta charset="UTF-8"> -*-
 from app.extensions import db
 import os
 from flask import current_app
@@ -11,6 +11,12 @@ from app.forms import RegisterForm, LoginForm, ResetPasswordForm, WordForm
 from app.models import User, Word, WordSample
 from app.extensions import db, bcrypt
 from flask_login import login_user, logout_user, login_required, current_user
+from flask import Blueprint, render_template, redirect, url_for, flash
+from app.forms import RegisterForm, LoginForm
+from app.models import User
+from app import db, bcrypt
+from flask_login import login_user, logout_user, login_required
+from app.extensions import db
 main = Blueprint('main', __name__)
 
 @main.route('/register', methods=['GET', 'POST'])
@@ -29,6 +35,7 @@ def register():
 @main.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+
 
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -56,6 +63,19 @@ def login():
 def dashboard():
     return render_template('dashboard.html')
 
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user)
+            return redirect(url_for('main.dashboard'))
+        else:
+            flash('Hatali kullanici adi veya sifre.', 'danger')
+    return render_template('login.html', form=form)
+
+@main.route('/dashboard')
+@login_required
+def dashboard():
+    return "Hos geldin!"
 
 @main.route('/logout')
 def logout():

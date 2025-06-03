@@ -18,6 +18,11 @@
     {% endif %}
     {% endwith %}
 
+
+    <title>Kay�t Ol</title>
+</head>
+<body>
+    <h2>Kay�t Ol</h2>
     <form method="POST">
         {{ form.hidden_tag() }}
         {{ form.username.label }}<br>
@@ -30,5 +35,6 @@
     </form>
 
     <p>Zaten hesabın var mı? <a href="{{ url_for('main.login') }}">Giriş Yap</a></p>
+    <p>Zaten hesab�n var m�? <a href="{{ url_for('main.login') }}">Giri� Yap</a></p>
 </body>
 </html>
