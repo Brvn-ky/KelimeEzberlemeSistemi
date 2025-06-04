@@ -4,6 +4,7 @@ from wtforms import StringField, PasswordField, SubmitField, IntegerField
 from wtforms.validators import DataRequired, NumberRange
 from flask_wtf.file import FileField, FileAllowed
 
+
 class RegisterForm(FlaskForm):
     username = StringField('Kullanici Adi', validators=[DataRequired(), Length(min=4, max=150)])
     password = PasswordField('Sifre', validators=[DataRequired()])
