@@ -34,11 +34,21 @@
   <ItemGroup>
     <Folder Include="app\" />
     <Folder Include="app\static\" />
+    <Folder Include="app\static\uploads\" />
     <Folder Include="app\templates\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\templates\add_word.html" />
+    <Content Include="app\templates\chart.html" />
+    <Content Include="app\templates\dashboard.html" />
+    <Content Include="app\templates\history.html" />
     <Content Include="app\templates\login.html" />
+    <Content Include="app\templates\progress.html" />
+    <Content Include="app\templates\quiz.html" />
     <Content Include="app\templates\register.html" />
+    <Content Include="app\templates\report_template.html" />
+    <Content Include="app\templates\reset_password.html" />
+    <Content Include="app\templates\settings.html" />
     <Content Include="requirements.txt" />
   </ItemGroup>
   <ItemGroup>

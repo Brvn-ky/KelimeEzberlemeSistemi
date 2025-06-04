@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>İlerleme Durumu</title>
+</head>
+<body>
+    <h2>📈 Öğrenme İlerlemen</h2>
+    <table border="1">
+        <tr>
+            <th>Kelime</th>
+            <th>Doğru</th>
+            <th>Yanlış</th>
+            <th>Son Cevap</th>
+            <th>Öğrenildi mi?</th>
+            <th>Başarı Yüzdesi</th> <!-- YENİ -->
+        </tr>
+        {% for item in stats %}
+        <tr>
+            <td>{{ item.kelime }}</td>
+            <td>{{ item.correct }}</td>
+            <td>{{ item.wrong }}</td>
+            <td>{{ item.last }}</td>
+            <td>{{ item.status }}</td>
+            <td>{{ item.success }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <p><a href="{{ url_for('main.dashboard') }}">🔙 Dashboard</a></p>
+</body>
+</html>

@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ayarlar</title>
+</head>
+<body>
+    <h2>⚙️ Ayarlar</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.quiz_limit.label }}<br>
+        {{ form.quiz_limit(min=1, max=20) }}<br><br>
+        {{ form.submit() }}
+    </form>
+    <p><a href="{{ url_for('main.dashboard') }}">🔙 Dashboard</a></p>
+</body>
+</html>

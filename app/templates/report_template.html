@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Öğrenme Raporu</title>
+</head>
+<body>
+    <h2>📄 Kullanıcı Raporu: {{ current_user.username }}</h2>
+
+    <h3>📊 Cevap Grafiği</h3>
+    <img src="data:image/png;base64,{{ chart }}" alt="Grafik" width="700">
+
+    <h3>📘 Kelime İstatistikleri</h3>
+    <table border="1" cellpadding="5" cellspacing="0">
+        <tr>
+            <th>Kelime</th>
+            <th>Doğru</th>
+            <th>Yanlış</th>
+            <th>Seviye</th>
+            <th>Son Cevap</th>
+        </tr>
+        {% for r in stats %}
+        <tr>
+            <td>{{ r.word.eng_word }}</td>
+            <td>{{ r.correct_count }}</td>
+            <td>{{ r.wrong_count }}</td>
+            <td>{{ r.level }}</td>
+            <td>{{ r.last_answered.strftime('%d.%m.%Y %H:%M') if r.last_answered else "-" }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Kelime Geçmişi</title>
+</head>
+<body>
+    <h2>🧾 Öğrenme Aşamaları</h2>
+    <table border="1">
+        <tr>
+            <th>Kelime</th>
+            <th>Seviye</th>
+            <th>İlerleme</th>
+            <th>Son Cevap</th>
+            <th>Bekleme Süresi</th>
+            <th>Quiz Durumu</th>
+        </tr>
+        {% for item in logs %}
+        <tr>
+            <td>{{ item.kelime }}</td>
+            <td>{{ item.level }}</td>
+            <td>{{ item.ilerleme }}</td>
+            <td>{{ item.last }}</td>
+            <td>{{ item.bekleme }}</td>
+            <td>{{ item.durum }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <p><a href="{{ url_for('main.dashboard') }}">🔙 Dashboard</a></p>
+</body>
+</html>
