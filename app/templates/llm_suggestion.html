@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>LLM Kelime Önerisi</title>
+</head>
+<body>
+    <h2>🤖 LLM Kelime Önerisi</h2>
+
+    <p><b>Kelime:</b> {{ suggestion.word }}</p>
+    <p><b>Anlamı:</b> {{ suggestion.meaning }}</p>
+    <p><b>Örnek Cümle:</b> {{ suggestion.sentence }}</p>
+
+    <form method="POST" action="{{ url_for('main.add_word_from_llm') }}">
+        <input type="hidden" name="word" value="{{ suggestion.word }}">
+        <input type="hidden" name="meaning" value="{{ suggestion.meaning }}">
+        <input type="hidden" name="sentence" value="{{ suggestion.sentence }}">
+        <button type="submit">➕ Veritabanına Ekle</button>
+    </form>
+
+    <p><a href="{{ url_for('main.llm_suggest') }}">🔁 Yeni Öneri Al</a></p>
+    <p><a href="{{ url_for('main.dashboard') }}">🔙 Dashboard</a></p>
+</body>
+</html>

@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>LLM Kelimeleri PDF</title>
+</head>
+<body>
+    <h2>📘 LLM Ürettiği Kelimeler</h2>
+    <table border="1" cellpadding="5" cellspacing="0">
+        <tr>
+            <th>Kelime</th>
+            <th>Anlamı</th>
+            <th>Örnek Cümle</th>
+        </tr>
+        {% for w in words %}
+        <tr>
+            <td>{{ w.eng_word }}</td>
+            <td>{{ w.tur_word }}</td>
+            <td>
+                {% if w.samples %}
+                🤖 <i>{{ w.samples[0].sentence }}</i> <br> <small>(Senin eklediğin örnek)</small>
+                {% elif w.sentence %}
+                🧠 <i>{{ w.sentence }}</i> <br> <small>(LLM tarafından önerildi)</small>
+                {% else %}
+                -
+                {% endif %}
+            </td>
+
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

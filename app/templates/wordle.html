@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Wordle - Kelime Oyunu</title>
+</head>
+<body>
+    <h2>🎮 Wordle</h2>
+
+    {% if word %}
+    <p>✅ Tebrikler! Doğru kelime: <b>{{ word }}</b></p>
+    <p><a href="{{ url_for('main.wordle') }}">🔁 Yeni Oyun</a></p>
+    {% else %}
+    {% if success %}
+    <p>✅ Tebrikler! Kelimeyi <b>{{ guess }}</b> olarak doğru bildin.</p>
+    <p><a href="{{ url_for('main.wordle') }}">🔁 Yeni Oyun</a></p>
+    {% else %}
+    {% endif %}
+    {% if guess %}
+    <p>Tahminin: <b>{{ guess }}</b></p>
+    <p>Sonuç: {{ result|join(' ') }}</p>
+    {% endif %}
+    <form method="POST">
+        <label>5 Harfli Tahmin:</label><br>
+        <input name="guess" maxlength="5" required>
+        <button type="submit">Tahmin Et</button>
+    </form>
+    {% endif %}
+
+    <p><a href="{{ url_for('main.dashboard') }}">🔙 Dashboard</a></p>
+</body>
+</html>

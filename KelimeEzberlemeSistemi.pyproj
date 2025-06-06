@@ -1135,6 +1135,7 @@
     <Content Include="app\templates\report_template.html" />
     <Content Include="app\templates\reset_password.html" />
     <Content Include="app\templates\settings.html" />
+    <Content Include="KelimeEzberlemeSistemi.sln" />
     <Content Include="requirements.txt" />
     <Content Include="UpgradeLog.htm" />
     <Content Include="__pycache__\config.cpython-312.pyc" />

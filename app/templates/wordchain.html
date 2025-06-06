@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Word Chain</title>
+</head>
+<body>
+    <h2>🔗 Word Chain</h2>
+
+    {% if game_over %}
+    <p><b>⏰ Süre doldu!</b></p>
+    <p>🔗 Zincirin uzunluğu: <b>{{ chain|length }}</b></p>
+    <form method="POST" action="{{ url_for('main.word_chain_reset') }}">
+        <button type="submit">🔁 Tekrar Oyna</button>
+    </form>
+    {% else %}
+    <p>Kalan Süre: <b>{{ time_left }} sn</b></p>
+
+    {% if message %}
+    <p>{{ message }}</p>
+    {% endif %}
+
+    <p><b>Zincir:</b> {{ chain|join(" → ") if chain else "Henüz başlatılmadı." }}</p>
+
+    <form method="POST">
+        <input name="guess" placeholder="Yeni kelime gir" required>
+        <button type="submit">Ekle</button>
+    </form>
+
+    <form method="POST" action="{{ url_for('main.word_chain_reset') }}">
+        <button type="submit">🔁 Sıfırla</button>
+    </form>
+    {% endif %}
+
+    <p><a href="{{ url_for('main.dashboard') }}">🔙 Dashboard</a></p>
+
+</body>
+</html>

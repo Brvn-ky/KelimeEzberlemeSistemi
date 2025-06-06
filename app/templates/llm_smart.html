@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Akıllı Kelime Önerisi</title>
+</head>
+<body>
+    <h2>🧠 Akıllı LLM Önerisi</h2>
+
+    <p><b>Yanlış yaptığın kelimeler:</b> {{ focus|join(', ') }}</p>
+
+    <p><b>Yeni Öneri:</b></p>
+    <ul>
+        <li><b>Kelime:</b> {{ suggestion.word }}</li>
+        <li><b>Anlamı:</b> {{ suggestion.meaning }}</li>
+        <li><b>Örnek:</b> {{ suggestion.sentence }}</li>
+    </ul>
+
+    <form method="POST" action="{{ url_for('main.add_word_from_llm') }}">
+        <input type="hidden" name="word" value="{{ suggestion.word }}">
+        <input type="hidden" name="meaning" value="{{ suggestion.meaning }}">
+        <input type="hidden" name="sentence" value="{{ suggestion.sentence }}">
+        <button type="submit">➕ Veritabanına Ekle</button>
+    </form>
+
+    <p><a href="{{ url_for('main.llm_smart_suggest') }}">🔁 Yeni Akıllı Öneri Al</a></p>
+    <p><a href="{{ url_for('main.dashboard') }}">🔙 Dashboard</a></p>
+</body>
+</html>

@@ -1,0 +1,8 @@
+﻿<h2>🧠 Wordle İstatistikleri</h2>
+<ul>
+    <li>Toplam Oyun: {{ total }}</li>
+    <li>Kazanılan Oyun: {{ won }}</li>
+    <li>Başarı Oranı: {{ (won/total*100)|round(1) if total > 0 else "-" }}%</li>
+    <li>Ortalama Deneme Sayısı: {{ avg }}</li>
+</ul>
+<a href="{{ url_for('main.dashboard') }}">🔙 Dashboard</a>
