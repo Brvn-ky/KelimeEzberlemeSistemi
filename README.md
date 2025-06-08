@@ -1,3 +1,4 @@
+## DİKKAT!!! Projenin son halinin commitini main branchine atamadık.Çünkü yapay zeka bağlamak için kullandığımız API-KEY son committe çok fazla hata verdi 2 gün boyunca bu commit için uğraştık ama maalesef atamadık.Proejenin son halini branchlerdeki projesonhali kısmına attık.Umarız kabul edersiniz.Teşekkürler.
 
 # 🎯 6 Seferlik Kelime Ezberleme Sistemi
 
@@ -95,7 +96,7 @@ Uygulama `WebView` ile Android’e port edilmiştir.
 
 
 ## DİKKAT!!!
-> Projeye katkı sırasında Ilayda arkadaşımızdan da başlangıç commitleri bulunmaktadır, ancak proje aktif olarak Berivan, Tuğba ve Gaye tarafından geliştirilmiştir.  
+> Projeye katkı sırasında İlayda arkadaşımızdan da başlangıç commitleri bulunmaktadır, ancak proje aktif olarak Berivan, Tuğba ve Gaye tarafından geliştirilmiştir.  
 > Final kod geliştirme süreci bu ekip tarafından tamamlanmıştır (Commit geçmişi görülebilir).
 
 
