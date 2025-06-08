@@ -6,6 +6,8 @@ Kelimeler 6 adımlı bir tekrar algoritması ile öğrenilir.
 Özellikler arasında Quiz sistemi, LLM kelime önerisi, Wordle/Word Chain oyunları, PDF raporlama ve mobil APK desteği yer almaktadır.  
 **Bu proje bir ekip çalışması ile geliştirilmiştir.**
 
+**Kod geliştirilirken KISS (Keep It Simple, Stupid) prensipleri göz önünde bulundurulmuş, gereksiz karmaşadan kaçınılmış, sade ve okunabilir kod yapısı tercih edilmiştir.**
+
 ## 🔗 GitHub Repo Linki
 
 [https://github.com/Brvn-ky/KelimeEzberlemeSistemi](https://github.com/Brvn-ky/KelimeEzberlemeSistemi)
@@ -91,6 +93,10 @@ Uygulama `WebView` ile Android’e port edilmiştir.
 - **Tuğba Avcı:** Kelime ekleme modülü, Quiz ayarları, PDF raporlama, ayarlar sayfası,SonarQube entegrasyonu 
 - **Gaye Kaymak:** Quiz sistemi, öğrenme seviyesi takibi, Wordle ve Word Chain oyunları, LLM entegrasyonu 
 
+
+## DİKKAT!!!
+> Projeye katkı sırasında Ilayda arkadaşımızdan da başlangıç commitleri bulunmaktadır, ancak proje aktif olarak Berivan, Tuğba ve Gaye tarafından geliştirilmiştir.  
+> Final kod geliştirme süreci bu ekip tarafından tamamlanmıştır (Commit geçmişi görülebilir).
 
 
 ---
